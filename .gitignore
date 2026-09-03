@@ -10,7 +10,6 @@ AGENTS.md
 CLAUDE.md
 native/
 /local
-scripts/
 *_local/
 _satellites/
 .agents/
