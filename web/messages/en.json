@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "storytelling — a daily interview that slowly turns into you",
+    "description": "An open-source, local-first AI that listens to your voice memos, transcribes them, and quietly writes a literary autobiography in plain Markdown — one short recording at a time."
+  },
+  "hero": {
+    "eyebrow": "an open-source long-memory project",
+    "titleA": "A daily interview that",
+    "titleB": "slowly turns into",
+    "titleYou": "you",
+    "titlePeriod": ".",
+    "body": "storytelling is a local-first AI that listens to your voice memos, transcribes them, and quietly writes them into a literary autobiography — one short recording at a time. It lives in a folder on your own disk, in plain Markdown. No cloud lock-in. No terms of service over your memories.",
+    "ctaGithub": "Read on GitHub",
+    "ctaStage": "early days",
+    "ctaIdea": "why I'm building this →"
+  },
+  "loop": {
+    "eyebrow": "how it works",
+    "titleA": "Four skills,",
+    "titleB": "one quiet loop.",
+    "nextTag": "next",
+    "body": "storytelling runs as agent skills on your own machine. Each one does a single small thing; together they form a loop — every answer you record makes tomorrow's question a little sharper.",
+    "steps": [
+      {
+        "num": "01",
+        "skill": "story-listen",
+        "name": "Listen",
+        "desc": "Pulls new recordings out of Apple Voice Memos — audio, title, date — and files each one into its own self-contained folder.",
+        "artifact": "recordings/…/recording.m4a",
+        "status": "shipped"
+      },
+      {
+        "num": "02",
+        "skill": "story-transcribe",
+        "name": "Transcribe",
+        "desc": "Turns the audio into plain-text transcripts, with your personal hotword list so names, places and projects come out right.",
+        "artifact": "transcript.md",
+        "status": "shipped"
+      },
+      {
+        "num": "03",
+        "skill": "story-write",
+        "name": "Write",
+        "desc": "Reads the transcripts and writes your biography — in a literary voice you define. By default: Murakami-esque. Restrained, precise, a little sad.",
+        "artifact": "biography/2026/09/01-….md",
+        "status": "shipped"
+      },
+      {
+        "num": "04",
+        "skill": "story-interview",
+        "name": "Interview",
+        "desc": "Reads the biography, finds the gaps, and asks the one question only it could ask today. Then you answer — and the loop starts over.",
+        "artifact": "today's question",
+        "status": "next"
+      }
+    ]
+  },
+  "manuscript": {
+    "eyebrow": "what it leaves on disk",
+    "titleA": "A book that",
+    "titleB": "files itself.",
+    "body": "Everything lives under ~/.storytelling as plain Markdown with YAML frontmatter — the same format your notes and wikis use. Years become volumes, months become chapters, every piece of writing a section. Grep it, version it with git, print it into a book, or hand it to any AI as memory.",
+    "treeCaption": "~/.storytelling/",
+    "bioCaption": "biography/2026/09/01-morning-along-the-canal.md"
+  },
+  "principles": {
+    "eyebrow": "what this is, in three lines",
+    "items": [
+      {
+        "title": "Voice in, Markdown out.",
+        "body": "Every recording ends as a typed, timestamped, source-annotated Markdown file on your disk. Nothing is locked inside a SaaS."
+      },
+      {
+        "title": "Local-first, forever.",
+        "body": "Your autobiography sits in a folder you control. Move it, back it up, version it, hand it to another agent — it never stops being yours."
+      },
+      {
+        "title": "The interviewer gets better at asking.",
+        "body": "Today's question is shaped by everything you've said before. The loop is the product."
+      }
+    ]
+  },
+  "footer": {
+    "lineA": "The first ten days are mine.",
+    "lineB": "After that, it's yours.",
+    "status": "v0.0.1 · cold start · personal research project",
+    "ideaLink": "read the full idea →"
+  }
+}

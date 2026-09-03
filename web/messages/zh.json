@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "storytelling —— 一场每天进行的访谈，慢慢沉淀为你",
+    "description": "一个开源、local-first 的 AI：聆听你的语音备忘录，转写成文字，再悄悄写成一本文学性的自传——每次一小段录音，全部以纯 Markdown 留在你自己的硬盘上。"
+  },
+  "hero": {
+    "eyebrow": "一个开源的长期记忆项目",
+    "titleA": "一场每天进行的访谈，",
+    "titleB": "慢慢沉淀为",
+    "titleYou": "你",
+    "titlePeriod": "。",
+    "body": "storytelling 是一个 local-first 的 AI：它聆听你的语音备忘录，转写成文字，再悄悄写成一本文学性的自传——每次一小段录音。它以纯 Markdown 的形式，住在你自己硬盘上的一个文件夹里。没有云锁定，也没有凌驾于记忆之上的服务条款。",
+    "ctaGithub": "在 GitHub 上阅读",
+    "ctaStage": "早期阶段",
+    "ctaIdea": "我为什么做这件事 →"
+  },
+  "loop": {
+    "eyebrow": "它如何运转",
+    "titleA": "四个 Skill，",
+    "titleB": "一个安静的循环。",
+    "nextTag": "下一步",
+    "body": "storytelling 以 agent skill 的形式运行在你自己的机器上。每个 skill 只做一件小事；合起来是一个循环——你今天录下的每一次回答，都让明天的问题更准一分。",
+    "steps": [
+      {
+        "num": "01",
+        "skill": "story-listen",
+        "name": "聆听",
+        "desc": "从 Apple 语音备忘录中取出新录音——音频、标题、日期——把每一份归档进它自己的独立目录。",
+        "artifact": "recordings/…/recording.m4a",
+        "status": "shipped"
+      },
+      {
+        "num": "02",
+        "skill": "story-transcribe",
+        "name": "转写",
+        "desc": "把音频转成纯文本逐字稿；配合你的个人热词表，人名、地名、项目名都不会错。",
+        "artifact": "transcript.md",
+        "status": "shipped"
+      },
+      {
+        "num": "03",
+        "skill": "story-write",
+        "name": "撰写",
+        "desc": "通读逐字稿，撰写你的传记——文风由你定义。默认是村上春树式的：克制、精确，带一点淡淡的忧伤。",
+        "artifact": "biography/2026/09/01-….md",
+        "status": "shipped"
+      },
+      {
+        "num": "04",
+        "skill": "story-interview",
+        "name": "采访",
+        "desc": "通读传记，找出空白，问出那个只有它今天才问得出的问题。然后你回答——循环重新开始。",
+        "artifact": "今日的问题",
+        "status": "next"
+      }
+    ]
+  },
+  "manuscript": {
+    "eyebrow": "留在硬盘上的东西",
+    "titleA": "一本自己",
+    "titleB": "归档的书。",
+    "body": "一切都在 ~/.storytelling 下，是带 YAML frontmatter 的纯 Markdown——和你的笔记、wiki 同样的格式。年份是部，月份是章，每篇文章是一小节。可以 grep，可以用 git 版本管理，可以印成书，也可以交给任何一个 AI 当记忆。",
+    "treeCaption": "~/.storytelling/",
+    "bioCaption": "biography/2026/09/01-运河边的清晨.md"
+  },
+  "principles": {
+    "eyebrow": "三句话说清它是什么",
+    "items": [
+      {
+        "title": "语音进去，Markdown 出来。",
+        "body": "每一份录音最终都成为硬盘上一个带时间戳、标注了来源的 Markdown 文件。没有任何东西被锁进 SaaS。"
+      },
+      {
+        "title": "Local-first，直到永远。",
+        "body": "你的自传躺在你掌控的文件夹里。迁移、备份、版本管理、交给别的 agent——它始终是你的。"
+      },
+      {
+        "title": "采访者越来越会提问。",
+        "body": "今天的问题，由你说过的一切塑造。这个循环，就是产品本身。"
+      }
+    ]
+  },
+  "footer": {
+    "lineA": "最初的十天是我的。",
+    "lineB": "此后，它是你的。",
+    "status": "v0.0.1 · 冷启动 · 个人研究项目",
+    "ideaLink": "阅读完整构想 →"
+  }
+}
