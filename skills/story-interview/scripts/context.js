@@ -28,7 +28,8 @@ function main() {
         sections.push({
           path: full,
           volume: fm.volume || '',
-          chapter: fm.chapter || '',
+          year: fm.year || '',
+          chapter: fm.chapter != null ? fm.chapter : '',
           section: Number(fm.section) || 0,
           title: fm.title || entry.name,
           period: fm.period || '',
