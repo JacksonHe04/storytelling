@@ -14,7 +14,7 @@ const paths = {
   get hotwords() { return path.join(storytellingHome(), 'hotwords.txt'); },
   get recordings() { return path.join(storytellingHome(), 'recordings'); },
   get interviews() { return path.join(storytellingHome(), 'interviews'); },
-  get memories() { return path.join(storytellingHome(), 'memories'); },
+  get sources() { return path.join(storytellingHome(), 'sources'); },
   get biography() { return path.join(storytellingHome(), 'biography'); },
   logDir(skill) { return path.join(storytellingHome(), 'log', skill); },
 };
@@ -101,11 +101,42 @@ function finishBatch(batch, summary) {
   return file;
 }
 
+// 解析 Markdown 的 YAML frontmatter，返回键值对象；`sources` 等列表字段解析为字符串数组。
+function parseFrontmatter(text) {
+  const m = text.match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return null;
+  const fm = {};
+  const lines = m[1].split('\n');
+  let inList = false;
+  for (const line of lines) {
+    const listKey = line.match(/^(\w+)\s*:\s*$/);
+    if (listKey) {
+      fm[listKey[1]] = [];
+      inList = listKey[1];
+      continue;
+    }
+    if (inList) {
+      const s = line.match(/^\s+-\s+(.+?)\s*$/);
+      if (s) {
+        fm[inList].push(s[1].replace(/^["']|["']$/g, ''));
+        continue;
+      }
+      inList = false;
+    }
+    const kv = line.match(/^(\w+)\s*:\s*(.*)$/);
+    if (kv) {
+      fm[kv[1]] = kv[2].trim().replace(/^["']|["']$/g, '');
+    }
+  }
+  return fm;
+}
+
 module.exports = {
   paths,
   loadSettings,
   ensureDir,
   parseArgs,
+  parseFrontmatter,
   slugify,
   formatLocalTimestamp,
   formatLocalTimestampSeconds,

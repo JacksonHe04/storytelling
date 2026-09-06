@@ -1,45 +1,15 @@
 #!/usr/bin/env node
 'use strict';
 
-// 撰写规划：扫描所有已转写录音，对照 biography 各小节 frontmatter 的 sources（uuid），
-// 算出哪些月份有尚未写入传记的录音，按年月分组输出工作清单。
+// 撰写规划：扫描所有已转写录音与访谈记录，对照 biography 各小节 frontmatter 的 sources（uuid），
+// 算出哪些月份有尚未写入传记的素材（录音按年月分组、访谈单独列出），输出工作清单。
 // 小节 sources 的并集即「已入传」状态，目录本身即状态，无需额外 state 文件。
 // 用法: node plan.js   （输出 JSON 到 stdout）
 
 const fs = require('fs');
 const path = require('path');
 
-const { paths } = require('../../story-listen/scripts/storytelling');
-
-// 解析小节 Markdown 的 YAML frontmatter（只取 story-write 需要的字段）
-function parseFrontmatter(text) {
-  const m = text.match(/^---\n([\s\S]*?)\n---/);
-  if (!m) return null;
-  const fm = {};
-  const lines = m[1].split('\n');
-  let inSources = false;
-  for (const line of lines) {
-    if (/^sources\s*:/.test(line)) {
-      fm.sources = [];
-      inSources = true;
-      continue;
-    }
-    if (inSources) {
-      const s = line.match(/^\s+-\s+(.+?)\s*$/);
-      if (s) {
-        fm.sources.push(s[1].replace(/^["']|["']$/g, ''));
-        continue;
-      }
-      inSources = false;
-    }
-    const kv = line.match(/^(\w+)\s*:\s*(.*)$/);
-    if (kv) {
-      let v = kv[2].trim().replace(/^["']|["']$/g, '');
-      fm[kv[1]] = v;
-    }
-  }
-  return fm;
-}
+const { paths, parseFrontmatter } = require('../../story-listen/scripts/storytelling');
 
 function yearMonth(isoDate) {
   const d = new Date(isoDate);
@@ -109,12 +79,33 @@ function main() {
     pending[ym].sort((a, b) => (a.date || '').localeCompare(b.date || ''));
   }
 
+  // 未入传的访谈记录（离线访谈录 = 问题清单本身待消化；交互访谈 = 问答记录）
+  const pendingInterviews = [];
+  if (fs.existsSync(paths.interviews)) {
+    for (const entry of fs.readdirSync(paths.interviews)) {
+      if (!entry.endsWith('.md')) continue;
+      const full = path.join(paths.interviews, entry);
+      const fm = parseFrontmatter(fs.readFileSync(full, 'utf8'));
+      if (!fm || fm.type !== 'interview' || !fm.uuid) continue;
+      if (sourcedUuids.has(fm.uuid)) continue;
+      pendingInterviews.push({
+        uuid: fm.uuid,
+        mode: fm.mode || 'offline',
+        created_at: fm.created_at || '',
+        path: full,
+      });
+    }
+    pendingInterviews.sort((a, b) => a.created_at.localeCompare(b.created_at));
+  }
+
   const result = {
     pending,
+    pendingInterviews,
     existingSections,
     stats: {
       total_recordings: recordings.length,
       pending_count: Object.values(pending).reduce((n, arr) => n + arr.length, 0),
+      pending_interviews: pendingInterviews.length,
       section_count: Object.values(existingSections).reduce((n, arr) => n + arr.length, 0),
       pending_months: Object.keys(pending).sort(),
     },
