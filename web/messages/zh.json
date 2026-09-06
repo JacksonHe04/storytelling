@@ -16,7 +16,7 @@
   },
   "loop": {
     "eyebrow": "它如何运转",
-    "titleA": "四个 Skill，",
+    "titleA": "五个 Skill，",
     "titleB": "一个安静的循环。",
     "nextTag": "下一步",
     "body": "storytelling 以 agent skill 的形式运行在你自己的机器上。每个 skill 只做一件小事；合起来是一个循环——你今天录下的每一次回答，都让明天的问题更准一分。",
@@ -51,7 +51,15 @@
         "name": "采访",
         "desc": "通读传记，找出空白，问出那个只有它今天才问得出的问题。然后你回答——循环重新开始。",
         "artifact": "今日的问题",
-        "status": "next"
+        "status": "shipped"
+      },
+      {
+        "num": "05",
+        "skill": "story-research",
+        "name": "挖掘",
+        "desc": "翻开你的旧档案（Notion 导出），按传记的空白检索核实，把多年前写下的话补回这本书。",
+        "artifact": "不落盘，直供撰写",
+        "status": "shipped"
       }
     ]
   },

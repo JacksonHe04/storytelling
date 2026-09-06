@@ -16,7 +16,7 @@
   },
   "loop": {
     "eyebrow": "how it works",
-    "titleA": "Four skills,",
+    "titleA": "Five skills,",
     "titleB": "one quiet loop.",
     "nextTag": "next",
     "body": "storytelling runs as agent skills on your own machine. Each one does a single small thing; together they form a loop — every answer you record makes tomorrow's question a little sharper.",
@@ -51,7 +51,15 @@
         "name": "Interview",
         "desc": "Reads the biography, finds the gaps, and asks the one question only it could ask today. Then you answer — and the loop starts over.",
         "artifact": "today's question",
-        "status": "next"
+        "status": "shipped"
+      },
+      {
+        "num": "05",
+        "skill": "story-research",
+        "name": "Research",
+        "desc": "Opens your old archive (a Notion export), searches it against the gaps in the biography, and brings what you wrote years ago back into the book.",
+        "artifact": "nothing on disk — straight to Write",
+        "status": "shipped"
       }
     ]
   },
