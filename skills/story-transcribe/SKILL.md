@@ -1,6 +1,6 @@
 ---
 name: story-transcribe
-description: 转写 —— 调用豆包（火山引擎）录音文件识别极速版，把 ~/.storytelling/recordings/ 下的录音批量转写为文本，结果写入各录音目录的 transcript.md（YAML frontmatter + 转写正文）。当用户需要转写录音、语音转文字、把录音变成文字稿、或为后续传记撰写准备文本语料时，使用此 skill。
+description: 转写 —— 调用豆包（火山引擎）录音文件识别极速版，把 ~/.storytelling/recordings/ 下的录音批量转写为文本，结果写入各录音目录的 transcript.md（YAML frontmatter + 转写正文）；并负责专名校正与热词维护（aliases.json 专名对照表、normalize.js 全局归一、向用户澄清 ASR 误写）。当用户需要转写录音、语音转文字、把录音变成文字稿、校正转写稿中的专有名词、或为后续传记撰写准备文本语料时，使用此 skill。
 ---
 
 # story-transcribe · 转写
@@ -74,3 +74,22 @@ node skills/story-transcribe/scripts/transcribe.js --limit=5
 
 - 极速版限制 2 小时 / 100MB；超出的录音需改用标准版（异步 + 音频 URL），目前数据最长 27 分钟，无此问题。
 - m4a 直传已验证可用；若未来格式报错，可用 afconvert 转 16kHz 单声道 WAV 兜底。
+
+## 专名校正与热词维护
+
+转写稿中的人名、公司名、产品名几乎必然出现 ASR 误写。完整方法论（权威级联、澄清协议、
+热词维护规则）见 [references/transcript-normalization.md](references/transcript-normalization.md)，要点：
+
+- **数据源**：[scripts/aliases.json](scripts/aliases.json)——`confirmed`（用户澄清过/热词已确认的
+  correct + aliases 映射）与 `pending`（存疑待澄清，脚本只提醒不替换）。
+- **执行**：`normalize.js` 把 confirmed 的别名全局替换为正确写法，范围是
+  `recordings/*/transcript.md`、`biography/**/*.md`、`MEMORY.md`（按别名长度降序防嵌套误替换）：
+
+```bash
+node skills/story-transcribe/scripts/normalize.js --dry-run   # 预览
+node skills/story-transcribe/scripts/normalize.js             # 执行
+```
+
+- **澄清后三件事缺一不可**：aliases.json 转正 → hotwords.txt 加热词（下次转写自动生效）→
+  运行 normalize.js 清理存量。
+- 传记正文中遇到未确认的疑似专名，先用保守写法，勿传播具体误写。

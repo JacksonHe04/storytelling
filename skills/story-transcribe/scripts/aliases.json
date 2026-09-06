@@ -1,0 +1,23 @@
+{
+  "_comment": "专名对照表：confirmed 中的 aliases 会被 normalize.js 全局替换为 correct；pending 仅作提醒，须向用户澄清后转正。新增条目时同步维护 hotwords.txt。",
+  "confirmed": [
+    { "correct": "雨哥", "aliases": ["宇哥"], "note": "雷雨（美团加二）的称呼" },
+    { "correct": "洁莹", "aliases": ["洁影", "杰英", "结营"], "note": "王洁莹，美团 leader" },
+    { "correct": "阶跃星辰", "aliases": ["杰越", "杰月", "借月", "街月", "接月"], "note": "英文名 StepFun" },
+    { "correct": "StepFun", "aliases": ["StableFun"], "note": "阶跃星辰英文名" },
+    { "correct": "Reina", "aliases": ["瑞娜", "薇娜", "瑞纳"], "note": "Sand AI 同伴" },
+    { "correct": "万竞屹", "aliases": ["万静怡"], "note": "Sand AI 同伴，称呼一一" },
+    { "correct": "一一", "aliases": ["依依"], "note": "万竞屹的称呼" },
+    { "correct": "谢钰萌", "aliases": ["思思萌", "谢玉萌", "玉萌"], "note": "智谱时期同事，后去字节/火山" },
+    { "correct": "林木老师", "aliases": ["铃木老师"], "note": "求职博主" },
+    { "correct": "查经班", "aliases": ["查禁办"], "note": "基督教读书会" },
+    { "correct": "SAYLESS", "aliases": ["Cless"], "note": "求职/AI 行业内容账号" },
+    { "correct": "Albums", "aliases": ["Albans"], "note": "后摇滚鉴赏账号" },
+    { "correct": "Sand AI", "aliases": ["SandAI"], "note": "公司名规范写法，与 hotwords 中 Sand.ai 一致" }
+  ],
+  "pending": [
+    { "suspect": "阿凡达 / MCM / 袋鼠宝宝 / 庆斌", "context": "美团内部产品与人名，260402 雷雨沟通" },
+    { "suspect": "越剑", "context": "疑似「阅卷」，260617 大物复习课" },
+    { "suspect": "GAGA", "context": "Sand AI 视频产品名，260707" }
+  ]
+}
