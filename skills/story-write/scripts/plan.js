@@ -54,9 +54,9 @@ function main() {
       } else if (entry.name.endsWith('.md')) {
         const fm = parseFrontmatter(fs.readFileSync(full, 'utf8'));
         if (!fm) continue;
-        const vol = fm.volume;
-        const chap = String(fm.chapter || '').padStart(2, '0');
-        const ym = `${vol}-${chap}`;
+        const year = fm.year || fm.volume; // 兼容旧版 volume=年份
+        const chap = fm.chapter != null ? String(fm.chapter).padStart(2, '0') : '';
+        const ym = chap ? `${year}-${chap}` : String(year);
         (existingSections[ym] = existingSections[ym] || []).push({
           path: full,
           title: fm.title || entry.name,
