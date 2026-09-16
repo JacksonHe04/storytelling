@@ -99,18 +99,24 @@ async function queryTask(taskId, options = {}) {
   throw new Error(`查询到任务失败（api-status: ${statusCode}, message: ${message}, logid: ${logid}）`);
 }
 
+// 说话人编号位于分句的 additions.speaker（不是顶层 speaker_id）
+function speakerOf(utterance) {
+  return utterance.additions?.speaker ?? null;
+}
+
 // 连续相同说话人的分句合为一段，段前缀「说话人N:」；只有单一说话人时退化为纯文本
 function formatSpeakerText(utterances) {
   if (!Array.isArray(utterances) || utterances.length === 0) return null;
-  const speakerIds = new Set(utterances.map((u) => u.speaker_id));
+  const speakerIds = new Set(utterances.map(speakerOf));
   if (speakerIds.size <= 1) return null;
   const paragraphs = [];
   let current = null;
   for (const u of utterances) {
-    if (current && current.speaker === u.speaker_id) {
+    const speaker = speakerOf(u);
+    if (current && current.speaker === speaker) {
       current.parts.push(u.text);
     } else {
-      current = { speaker: u.speaker_id, parts: [u.text] };
+      current = { speaker, parts: [u.text] };
       paragraphs.push(current);
     }
   }
@@ -134,7 +140,7 @@ async function transcribeAsync(audioUrl, options = {}) {
       const speakerText = formatSpeakerText(q.utterances);
       return {
         text: speakerText || q.text,
-        speakers: q.utterances ? new Set(q.utterances.map((u) => u.speaker_id)).size : null,
+        speakers: q.utterances ? new Set(q.utterances.map(speakerOf)).size : null,
         speakerUsed: !!speakerText,
         taskId,
         logid: q.logid,
