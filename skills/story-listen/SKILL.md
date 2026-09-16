@@ -14,7 +14,9 @@ description: 聆听 —— 录音导入。两个来源：① 从 Mac 本地 iClo
 
 - **完整磁盘访问权限**（仅苹果来源需要）：运行脚本的终端 App（Terminal / iTerm / VS Code 等）需在
   「系统设置 → 隐私与安全性 → 完整磁盘访问权限」中勾选。脚本在检测到权限不足时会自动打开该设置面板。
-- 语音备忘录 App 至少打开过一次，iCloud 已完成同步（刚录的音若未同步完，本地只有占位文件，会被自动跳过）。
+- 语音备忘录 App 至少打开过一次。注意 `CloudRecordings.db` 只是 iCloud 的**本地同步副本**，
+  App 不运行时不会主动拉取云端新录音；本地查不到不代表云端没有——先按下文「iCloud 云端同步」触发同步。
+  刚录的音若未同步完，本地只有占位文件（<10KB），会被自动跳过。
 - **飞书来源需要**：lark-cli 已配置且 user 身份已授权（见下文「飞书妙记导入」）。
 
 脚本零第三方依赖：使用 Node 24 内置的 `node:sqlite` 读数据库，音频转换用 macOS 自带 `afconvert`；
@@ -71,6 +73,25 @@ node skills/story-listen/scripts/export.js
 5. 未导出的录音：创建 `<slug>-<时间戳>/` 目录并复制音频，`.qta` 容器经 `afconvert` 转为 `recording.m4a`，写入 `meta.json`（含 `uuid`）。
 6. 已导出的录音：目录名与预期不符则重命名；回写 `meta.json` 同步标题/时长等更新。
 7. 写入批次日志 `log/listen/<批次时间>.json`。
+
+## iCloud 云端同步
+
+`CloudRecordings.db` 与音频文件是 iCloud 的本地同步副本：App 不运行时**不会**主动拉取云端新录音，
+本地列表可能落后于手机端。判断与拉取方法：
+
+1. **判断是否落后**：看同步目录的最新修改时间——
+   ```bash
+   stat -f "%Sm" ~/Library/Group\ Containers/group.com.apple.VoiceMemos.shared/Recordings/CloudRecordings.db-wal
+   ```
+   若明显早于手机端最近的录音日期，本地就是落后的。
+2. **触发同步**：`open -a VoiceMemos` 打开语音备忘录 App（iCloud 拉取需要 App 在运行/前台），
+   轮询等待新文件出现且大小稳定：
+   ```bash
+   find ~/Library/Group\ Containers/group.com.apple.VoiceMemos.shared/Recordings/ \
+     -newermt "<上次同步日期>" -type f \( -name "*.qta" -o -name "*.m4a" \)
+   ```
+   长录音（几十分钟以上）下载需要时间，以文件大小连续两次不变为准。
+3. **同步完成后**重跑 `list.js` / `export.js`，新录音即可被增量导出。
 
 ## 飞书妙记导入
 
