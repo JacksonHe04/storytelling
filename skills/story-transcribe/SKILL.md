@@ -120,4 +120,8 @@ node skills/story-transcribe/scripts/normalize.js             # 执行
 
 - **澄清后三件事缺一不可**：aliases.json 转正 → hotwords.txt 加热词（下次转写自动生效）→
   运行 normalize.js 清理存量。
+- **别在会被归一的文本里罗列别名**：MEMORY / 传记正文若写出「转写里的『XX』其实都是他」这类
+  枚举，会在下一次归一中被替换成正确写法而自我损坏（已发生一次）。要留痕就写进 aliases.json 的 note。
+- **误伤保护**：别名含常用词时（如「小伙」之于「小伙伴」）在条目里加 `exclude: ["小伙伴"]`，
+  normalize.js 会先占位保护再替换。
 - 传记正文中遇到未确认的疑似专名，先用保守写法，勿传播具体误写。
