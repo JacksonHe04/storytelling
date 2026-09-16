@@ -13,11 +13,21 @@
     { "correct": "查经班", "aliases": ["查禁办"], "note": "基督教读书会" },
     { "correct": "SAYLESS", "aliases": ["Cless"], "note": "求职/AI 行业内容账号" },
     { "correct": "Albums", "aliases": ["Albans"], "note": "后摇滚鉴赏账号" },
-    { "correct": "Sand AI", "aliases": ["SandAI"], "note": "公司名规范写法，与 hotwords 中 Sand.ai 一致" }
+    { "correct": "Sand AI", "aliases": ["SandAI"], "note": "公司名规范写法，与 hotwords 中 Sand.ai 一致" },
+    { "correct": "小满", "aliases": ["小曼"], "note": "梁咏兰，Sand AI 同伴，KOL 达人运营" },
+    { "correct": "梁咏兰", "aliases": ["梁永兰"], "note": "Sand AI 同伴，称呼小满" },
+    { "correct": "符思怡", "aliases": ["苏瑞", "苏芮", "苏月", "石瑞"], "note": "Sand AI 同伴，称呼 Suri" },
+    { "correct": "青青", "aliases": ["秦秦"], "note": "Sand AI 同事（达人运营）" },
+    { "correct": "面包干", "aliases": ["梅博干", "孟佳", "面包糕"], "note": "Sand AI 同事；「孟佳」「面包糕」为 ASR 误写" },
+    { "correct": "懒仓", "aliases": ["揽沧", "冉灿"], "note": "Sand AI 同伴" }
   ],
   "pending": [
     { "suspect": "阿凡达 / MCM / 袋鼠宝宝 / 庆斌", "context": "美团内部产品与人名，260402 雷雨沟通" },
     { "suspect": "越剑", "context": "疑似「阅卷」，260617 大物复习课" },
-    { "suspect": "GAGA", "context": "Sand AI 视频产品名，260707" }
+    { "suspect": "GAGA", "context": "Sand AI 视频产品名，260707" },
+    { "suspect": "佳欣 / 嘉欣 / 嘉卿 / 嘉清", "context": "260912 聚会反复出现的人名，疑似同一人的不同误写，也可能是同事青青，待澄清" },
+    { "suspect": "王佳 / 王嘉", "context": "260912 聚会：疑似公司里那位早期抖音员工（初创六人时期做运营增长），待澄清" },
+    { "suspect": "杰森 / 杰克逊 / Jack / 扎克 / Zack", "context": "260912 聚会中的同事称呼，Jack 与 Zack 疑似同一人，待澄清" },
+    { "suspect": "陈乐川拿到美团 offer", "context": "260912 聚会转写中出现的说法，用户 2026-09-17 澄清此事不存在：拿美团 offer 的一直是用户本人，陈乐川延毕" }
   ]
 }
