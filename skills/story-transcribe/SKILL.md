@@ -108,8 +108,8 @@ node skills/story-transcribe/scripts/transcribe.js --limit=5
 转写稿中的人名、公司名、产品名几乎必然出现 ASR 误写。完整方法论（权威级联、澄清协议、
 热词维护规则）见 [references/transcript-normalization.md](references/transcript-normalization.md)，要点：
 
-- **数据源**：[scripts/aliases.json](scripts/aliases.json)——`confirmed`（用户澄清过/热词已确认的
-  correct + aliases 映射）与 `pending`（存疑待澄清，脚本只提醒不替换）。
+- **数据源**：`~/.storytelling/aliases.json`——与 hotwords.txt 并列的**个人数据**，不进代码仓库；
+  `confirmed`（用户澄清过/热词已确认的 correct + aliases 映射）与 `pending`（存疑待澄清，脚本只提醒不替换）。
 - **执行**：`normalize.js` 把 confirmed 的别名全局替换为正确写法，范围是
   `recordings/*/transcript.md`、`biography/**/*.md`、`MEMORY.md`（按别名长度降序防嵌套误替换）：
 

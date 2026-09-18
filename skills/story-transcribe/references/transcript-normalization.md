@@ -1,8 +1,8 @@
 # 专名校正与热词维护（ASR 归一方法论）
 
 > 转写稿里的人名、公司名、产品名几乎必然出现 ASR 误写（如「借月星辰」→「阶跃星辰」）。
-> 本文档规定发现、澄清、校正、沉淀的完整流程。数据源是 `scripts/aliases.json`，
-> 执行工具是 `scripts/normalize.js`。
+> 本文档规定发现、澄清、校正、沉淀的完整流程。数据源是数据目录下的 `~/.storytelling/aliases.json`
+> ——与 `hotwords.txt` 并列的**个人数据**，不进代码仓库；执行工具是 `scripts/normalize.js`。
 
 ## 权威级联
 
@@ -64,4 +64,4 @@ node skills/story-transcribe/scripts/normalize.js
 
 - 替换按别名**长度降序**进行，避免嵌套误替换（「谢玉萌」先于「玉萌」）；
 - 批次日志写入 `~/.storytelling/log/transcribe/<批次时间>.json`；
-- `meta.json`、`hotwords.txt`、`aliases.json` 本身不会被脚本改动。
+- `meta.json` 与数据目录下的 `hotwords.txt`、`aliases.json` 本身不会被脚本改动。

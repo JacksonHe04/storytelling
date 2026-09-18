@@ -12,6 +12,7 @@ const paths = {
   get root() { return storytellingHome(); },
   get settings() { return path.join(storytellingHome(), 'settings.json'); },
   get hotwords() { return path.join(storytellingHome(), 'hotwords.txt'); },
+  get aliases() { return path.join(storytellingHome(), 'aliases.json'); },
   get recordings() { return path.join(storytellingHome(), 'recordings'); },
   get interviews() { return path.join(storytellingHome(), 'interviews'); },
   get sources() { return path.join(storytellingHome(), 'sources'); },
